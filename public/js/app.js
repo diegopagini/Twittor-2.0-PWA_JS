@@ -124,3 +124,15 @@ postBtn.on('click', function () {
 
 	crearMensajeHTML(mensaje, usuario);
 });
+
+// Obtener mensajes del servidor
+function getMensajes() {
+	fetch('api')
+		.then((res) => res.json())
+		.then((posteos) => {
+			posteos.forEach((post) => {
+				crearMensajeHTML(post.mensaje, post.user);
+			});
+		});
+}
+getMensajes();
