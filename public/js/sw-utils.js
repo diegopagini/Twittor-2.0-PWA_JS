@@ -30,15 +30,19 @@ function actualizaCacheStatico(staticCache, req, APP_SHELL_INMUTABLE) {
 function manejoApiMensajes(cacheName, req) {
 	if (req.clone().method === 'POST') {
 		//Posteo de un nuevo mensaje
-		req
-			.clone()
-			.text()
-			.then((body) => {
-				// console.log(body);
-				const bodyObj = JSON.parse(body);
-				guardarMensaje(bodyObj);
-			});
-		return fetch(req);
+
+		if (self.registration.sync) {
+			return req
+				.clone()
+				.text()
+				.then((body) => {
+					// console.log(body);
+					const bodyObj = JSON.parse(body);
+					return guardarMensaje(bodyObj);
+				});
+		} else {
+			return fetch(req);
+		}
 	} else {
 		return fetch(req)
 			.then((res) => {

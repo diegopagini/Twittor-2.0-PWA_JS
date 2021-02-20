@@ -80,3 +80,15 @@ self.addEventListener('fetch', (e) => {
 
 	e.respondWith(respuesta);
 });
+
+// Tareas asíncronas
+self.addEventListener('sync', (e) => {
+	console.log('SW: Sync');
+
+	if (e.tag === 'nuevo-post') {
+		// Postear a DB cuadno hay conexión.
+		const respuesta = postearMensajes();
+
+		e.waitUntil(respuesta);
+	}
+});
