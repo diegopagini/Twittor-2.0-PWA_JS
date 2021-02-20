@@ -28,4 +28,21 @@ router.get('/', function (req, res) {
 	res.json(mensajes);
 });
 
+// Post mensajes
+router.posty('/', function (req, res) {
+	const mensaje = {
+		mensaje: req.body.mensaje,
+		user: req.body.user,
+	};
+
+	mensajes.push(mensaje);
+
+	console.log(mensajes);
+
+	res.json({
+		ok: true,
+		mensaje: mensaje,
+	});
+});
+
 module.exports = router;
