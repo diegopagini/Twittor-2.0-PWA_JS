@@ -152,3 +152,25 @@ function getMensajes() {
 		});
 }
 getMensajes();
+
+// Detectar cambios de conexión
+function isOnline() {
+	if (navigator.onLine) {
+		// tenemos conexión
+		$.mdtoast('Online', {
+			interaction: true,
+			interactionTimeout: 1000,
+			actionText: 'OK!',
+		});
+	} else {
+		// no tenemos conexión
+		$.mdtoast('Offline', {
+			interaction: true,
+			actionText: 'OK',
+			type: 'warning',
+		});
+	}
+}
+// Detectar si esta online o no
+window.addEventListener('online', isOnline);
+window.addEventListener('offline', isOnline);
