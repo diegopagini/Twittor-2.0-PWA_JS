@@ -174,3 +174,26 @@ function isOnline() {
 // Detectar si esta online o no
 window.addEventListener('online', isOnline);
 window.addEventListener('offline', isOnline);
+
+// Notificaciones
+function notificarme() {
+	if (!window.Notification) {
+		console.log('Este navegador no soporta notificaciones');
+		return;
+	}
+
+	if (Notification.permission === 'granted') {
+		new Notification('Hola Mundo! - granted');
+	} else if (
+		Notification.permission !== 'denied' ||
+		Notification.permission === 'default'
+	) {
+		Notification.requestPermission(function (permission) {
+			console.log(permission);
+			if (permission === 'granted') {
+				new Notification('Hola Mundo! - pregunta');
+			}
+		});
+	}
+}
+notificarme();
