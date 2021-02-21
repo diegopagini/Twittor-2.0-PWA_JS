@@ -26,6 +26,9 @@ var modalAvatar = $('#modal-avatar');
 var avatarBtns = $('.seleccion-avatar');
 var txtMensaje = $('#txtMensaje');
 
+var btnActivadas = $('.btn-noti-activadas');
+var btnDesactivadas = $('.btn-noti-desactivadas');
+
 // El usuario, contiene el ID del hÃ©roe seleccionado
 var usuario;
 
@@ -176,6 +179,16 @@ window.addEventListener('online', isOnline);
 window.addEventListener('offline', isOnline);
 
 // Notificaciones
+function verificaSubscripcion(activadas) {
+	if (activadas) {
+		btnActivadas.removeClass('oculto');
+		btnDesactivadas.addClass('oculto');
+	} else {
+		btnActivadas.addClass('oculto');
+		btnDesactivadas.removeClass('oculto');
+	}
+}
+verificaSubscripcion(false);
 
 function enviarNotificacion() {
 	const notificationOpts = {
@@ -196,8 +209,8 @@ function notificarme() {
 	}
 
 	if (Notification.permission === 'granted') {
-		// new Notification('Hola Mundo! - granted');
-		enviarNotificacion();
+		new Notification('Hola Mundo! - granted');
+		// enviarNotificacion();
 	} else if (
 		Notification.permission !== 'denied' ||
 		Notification.permission === 'default'
@@ -205,8 +218,8 @@ function notificarme() {
 		Notification.requestPermission(function (permission) {
 			console.log(permission);
 			if (permission === 'granted') {
-				// new Notification('Hola Mundo! - pregunta');
-				enviarNotificacion();
+				new Notification('Hola Mundo! - pregunta');
+				// enviarNotificacion();
 			}
 		});
 	}
