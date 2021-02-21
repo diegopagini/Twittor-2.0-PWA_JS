@@ -176,6 +176,19 @@ window.addEventListener('online', isOnline);
 window.addEventListener('offline', isOnline);
 
 // Notificaciones
+
+function enviarNotificacion() {
+	const notificationOpts = {
+		body: 'Este es el cuerpo de la notificacion',
+		icon: 'img/icons/icon-72x72.png',
+	};
+	const n = new Notification('Hola Mundo', notificationOpts);
+
+	n.onclick = () => {
+		console.log('Click');
+	};
+}
+
 function notificarme() {
 	if (!window.Notification) {
 		console.log('Este navegador no soporta notificaciones');
@@ -183,7 +196,8 @@ function notificarme() {
 	}
 
 	if (Notification.permission === 'granted') {
-		new Notification('Hola Mundo! - granted');
+		// new Notification('Hola Mundo! - granted');
+		enviarNotificacion();
 	} else if (
 		Notification.permission !== 'denied' ||
 		Notification.permission === 'default'
@@ -191,7 +205,8 @@ function notificarme() {
 		Notification.requestPermission(function (permission) {
 			console.log(permission);
 			if (permission === 'granted') {
-				new Notification('Hola Mundo! - pregunta');
+				// new Notification('Hola Mundo! - pregunta');
+				enviarNotificacion();
 			}
 		});
 	}
