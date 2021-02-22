@@ -96,11 +96,39 @@ self.addEventListener('sync', (e) => {
 // Escuchar PUSH
 
 self.addEventListener('push', (e) => {
-	// console.log(e);
-	console.log(e.data.text());
+	console.log(data);
 
-	const title = e.data.text();
-	const options = {};
+	const data = JSON.parse(e.data.text());
+
+	const title = data.titulo;
+	const options = {
+		body: data.cuerpo,
+		// icon: 'img/icons/icon-72x72.png',
+		icon: `img/avatars/${data.usuario}.jpg`,
+		badge: 'img/favicon.ico',
+		image: '',
+		vibrate: [
+			75,
+			75,
+			75,
+			75,
+			75,
+			75,
+			75,
+			75,
+			150,
+			150,
+			150,
+			450,
+			75,
+			75,
+			75,
+			75,
+			75,
+			525,
+		],
+		openUrl: '/',
+	};
 
 	e.waitUntil(self.registration.showNotification(title, options));
 });
