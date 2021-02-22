@@ -224,4 +224,14 @@ function notificarme() {
 		});
 	}
 }
-notificarme();
+// notificarme();
+
+// Get Key
+function getPublicKey() {
+	return fetch('api/key')
+		.then((resp) => {
+			resp.arrayBuffer();
+		})
+		.then((key) => new Uint8Array(key));
+}
+getPublicKey().then(console.log);
