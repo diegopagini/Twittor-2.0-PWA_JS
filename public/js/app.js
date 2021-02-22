@@ -261,7 +261,17 @@ btnDesactivadas.on('click', function () {
 					body: JSON.stringify(subscripcion),
 				})
 					.then(verificaSubscripcion)
-					.catch(console.log);
+					.catch(cancelarSubscripcion);
 			});
 	});
+});
+
+function cancelarSubscripcion() {
+	swReg.pushManager.getSubscriptionO().then((subs) => {
+		subs.unsuscribe().then(() => verificaSubscripcion(false));
+	});
+}
+
+btnActivadas.on('click', function () {
+	cancelarSubscripcion();
 });

@@ -6,7 +6,7 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "node server/server.js",
-		"dev": "./node_modules/nodemon/bin/nodemon.js server/server",
+		"dev": "./node_modules/nodemon/bin/nodemon.js server/server --ignoe 'server/*.json' ",
 		"generate-vapid": "./node_modules/web-push/src/cli.js generate-vapid-keys --json > server/vapid.json"
 	},
 	"author": "",

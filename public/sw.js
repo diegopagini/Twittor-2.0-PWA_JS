@@ -92,3 +92,15 @@ self.addEventListener('sync', (e) => {
 		e.waitUntil(respuesta);
 	}
 });
+
+// Escuchar PUSH
+
+self.addEventListener('push', (e) => {
+	// console.log(e);
+	console.log(e.data.text());
+
+	const title = e.data.text();
+	const options = {};
+
+	e.waitUntil(self.registration.showNotification(title, options));
+});
