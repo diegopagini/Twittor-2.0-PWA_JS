@@ -48,6 +48,10 @@ router.post('/', function (req, res) {
 
 // Almacenar la subscripción
 router.post('/subscribe', (req, res) => {
+	const subscripcion = req.body;
+
+	push.addSubscription(subscripcion);
+
 	res.json('subscribe');
 });
 
