@@ -96,7 +96,7 @@ self.addEventListener('sync', (e) => {
 // Escuchar PUSH
 
 self.addEventListener('push', (e) => {
-	console.log(data);
+	// console.log(data);
 
 	const data = JSON.parse(e.data.text());
 
@@ -128,7 +128,36 @@ self.addEventListener('push', (e) => {
 			525,
 		],
 		openUrl: '/',
+		data: {
+			url: 'https://google.com',
+			id: data.usuario,
+		},
+		actions: [
+			{
+				action: 'thor-action',
+				title: 'Thor',
+				icon: 'img/avatar/thor.jpg',
+			},
+			{
+				action: 'spiderman-action',
+				title: 'Spiderman',
+				icon: 'img/avatar/spiderman.jpg',
+			},
+		],
 	};
 
 	e.waitUntil(self.registration.showNotification(title, options));
+});
+
+// Cuando cierra la notificacion
+self.addEventListener('notificacionclose', (e) => {
+	console.log('Notificacion cerrada', e);
+});
+
+// Cuando hace click en la notificacion
+self.addEventListener('notificationclick', (e) => {
+	const notificacion = e.notification;
+	const accion = e.accion;
+
+	console.log({ notificacion, accion });
 });
