@@ -160,4 +160,6 @@ self.addEventListener('notificationclick', (e) => {
 	const accion = e.accion;
 
 	console.log({ notificacion, accion });
+
+	notificacion.close();
 });
